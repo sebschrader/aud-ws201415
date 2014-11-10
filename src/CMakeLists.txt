@@ -8,4 +8,4 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
     LIST(APPEND CMAKE_C_FLAGS "-std=c11 -Wall -Werror")
 elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
 endif()
-
+add_subdirectory (e04)

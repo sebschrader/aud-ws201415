@@ -1,0 +1,11 @@
+
+cmake_minimum_required (VERSION 2.8.11)
+set(CMAKE_BUILD_TYPE "Release")
+project (AUD-WS201415)
+if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+    LIST(APPEND CMAKE_C_FLAGS "-std=c11 -Wall -Werror")
+elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+    LIST(APPEND CMAKE_C_FLAGS "-std=c11 -Wall -Werror")
+elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
+endif()
+

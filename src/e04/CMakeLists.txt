@@ -1,2 +1,3 @@
-add_executable (a03 a03.c)
-add_executable (a04 a04.c)
+add_executable (e04-a3 a3.c)
+add_executable (e04-a4 a4.c)
+

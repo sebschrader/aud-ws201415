@@ -1,5 +1,5 @@
 
-cmake_minimum_required (VERSION 2.8.11)
+cmake_minimum_required (VERSION 2.8.0)
 set(CMAKE_BUILD_TYPE "Release")
 project (AUD-WS201415)
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")

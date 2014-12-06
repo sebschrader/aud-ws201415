@@ -19,17 +19,24 @@
 char *getline() {
     size_t sz = 0;
     char *buf = NULL;
-    char *start;
+    char *step_start;
     do {
         sz += STEP_SIZE;
+        // Grow the buffer and leave space for the trailing NUL byte
         buf = realloc(buf, sz + 1);
-        start = buf + sz;
-        memset(buf + sz - STEP_SIZE, 0, STEP_SIZE + 1);
-        if (scanf("%" XSTR(STEP_SIZE) "[^\n]%*c", buf + sz - STEP_SIZE) != 1) {
+        if (buf == NULL) {
+            perror("realloc() failed");
+            return NULL;
+        }
+        step_start = buf + sz - STEP_SIZE;
+        memset(step_start, 0, STEP_SIZE + 1);
+        if (scanf("%" XSTR(STEP_SIZE) "[^\n]", step_start) != 1) {
             // There was an error during scanf
             break;
         }
-    } while(strlen(buf + sz - STEP_SIZE) == STEP_SIZE);
+    } while(strlen(step_start) == STEP_SIZE);
+    // Discard the newline character
+    scanf("%*c");
     return buf;
 }
 

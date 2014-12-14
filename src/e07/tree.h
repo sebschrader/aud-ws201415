@@ -7,5 +7,10 @@ typedef struct node {
     tree left, right;
 } node;
 
+
+tree parse_tree(const char *);
+
+void print_tree(tree);
+
 #endif
 

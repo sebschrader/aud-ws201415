@@ -19,8 +19,8 @@ void defol(tree *p) {
         // free'd memory which is very bad.
         *p = NULL;
     } else {
-        defol(t->left);
-        defol(t->right);
+        defol(&(t->left));
+        defol(&(t->right));
     }
 }
 

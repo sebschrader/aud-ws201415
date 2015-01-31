@@ -9,7 +9,11 @@ typedef struct elem {
 
 list parse_list(const char *);
 
+list prompt_list(void);
+
 void print_list(list);
+
+void free_list(list);
 
 #endif
 

@@ -4,9 +4,10 @@
 
 // Include supplemental functions which are not required by the assignment
 // and are too advanced.
+#include "e06/readline.h"
 #include "a3-supplemental.h"
 
-// maximum length of strings
+// maximum length of strings (including trailing \0)
 #define MAX_LENGTH 31
 
 // maximum number of contacts
@@ -41,8 +42,7 @@ int isEmpty(struct contact *c) {
  * Print the individual components of the contacts array to the console.
  */
 void printToConsole(struct contact contacts[]) {
-    for (int i = 0; i < MAX_CONTACTS; i++) {
-        if (isEmpty(contacts + i)) break;
+    for (int i = 0; i < MAX_CONTACTS && !isEmpty(contacts + i); i++) {
         printf("First name: %s\n", contacts[i].first_name);
         printf("Last name: %s\n", contacts[i].last_name);
         printf("Zip code: %s\n", contacts[i].zip_code);
@@ -61,8 +61,7 @@ void writeToFile(struct contact contacts[]) {
         return;
     }
     fprintf(file, "First name;Last name;Zip code;city;Email\n");
-    for (int i = 0; i < MAX_CONTACTS; i++) {
-        if (isEmpty(contacts + i)) break;
+    for (int i = 0; i < MAX_CONTACTS && !isEmpty(contacts + i); i++) {
         fprintf(file, "%s;%s;%s;%s;%s\n",
                 contacts[i].first_name, contacts[i].last_name,
                 contacts[i].zip_code, contacts[i].city, contacts[i].email);
@@ -74,23 +73,21 @@ void writeToFile(struct contact contacts[]) {
 /**
  * Ask the user for input of a specific attribute.
  *
- * @param name Name of the attribute. This will be used in the prompt.
+ * @param prompt Text that prompts the user for input.
  * @param dest
  */
-void readAttribute(const char *name, char *dest, size_t max_length) {
-    printf("%s: ", name);
+void readAttribute(const char *prompt, char *dest, size_t max_length) {
     // The exemplary solution just did
     // scanf("%s", &dest);
     // here, which works for legal input (<30 non-space characters), but as
     // always, doing it correctly in C requires a lot more code.
-    char *buf = getline();
-    if (strlen(buf) >= max_length) {
-        buf[max_length - 1] = '\0';
-    }
+    char *line = readline(prompt);
     // Copy string to destination
-    strcpy(dest, buf);
+    strncpy(dest, line, max_length);
+    // Ensure that the string is terminated
+    dest[max_length - 1] = '\0';
     // Free the temporary buffer
-    free(buf);
+    free(line);
 }
 
 
@@ -99,11 +96,11 @@ int main(void) {
     // Initialize contacts memory to zero
     memset(contacts, 0, sizeof(contacts));
     for (int i = 0; i < MAX_CONTACTS; i++) {
-        readAttribute("First name", contacts[i].first_name, MAX_LENGTH);
-        readAttribute("Last name", contacts[i].last_name, MAX_LENGTH);
-        readAttribute("Zip code", contacts[i].zip_code, 6);
-        readAttribute("City", contacts[i].city, MAX_LENGTH);
-        readAttribute("Email", contacts[i].email, MAX_LENGTH);
+        readAttribute("First name: ", contacts[i].first_name, MAX_LENGTH);
+        readAttribute("Last name: ", contacts[i].last_name, MAX_LENGTH);
+        readAttribute("Zip code: ", contacts[i].zip_code, 6);
+        readAttribute("City: ", contacts[i].city, MAX_LENGTH);
+        readAttribute("Email: ", contacts[i].email, MAX_LENGTH);
         // This is not required by the assignment;
         // it only eases playing with this program
         if (!shallContinue()) {

@@ -26,22 +26,3 @@ void removeEvens(list *l) {
     }
 }
 
-
-/**
- * Remove all even values from a list and return a new head if necessary.
- *
- * This solution is recursive and avoids using double-pointers.
- */
-list removeEvens2(list l) {
-    if (l == NULL) {
-        return l;
-    }
-    if (l->value % 2 == 0) {
-        list next = l->next;
-        free(l);
-        return removeEvens2(next);
-    }
-    l->next = removeEvens2(l->next);
-    return l;
-}
-

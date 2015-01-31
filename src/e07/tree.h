@@ -8,9 +8,13 @@ typedef struct node {
 } node;
 
 
-tree parse_tree(const char *);
+int parse_tree(tree *, const char *);
+
+tree prompt_tree(void);
 
 void print_tree(tree);
+
+void free_tree(tree);
 
 #endif
 

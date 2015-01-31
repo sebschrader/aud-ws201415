@@ -4,6 +4,6 @@
 int leafprod(tree t) {
     if (t == NULL) return 1;
     if (t->left == NULL && t->right == NULL) return t->key;
-    return leadprod(t->left) * leafprod(t->right);
+    return leafprod(t->left) * leafprod(t->right);
 }
 

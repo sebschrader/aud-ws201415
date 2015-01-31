@@ -3,7 +3,7 @@
 
 int count(tree t, int n) {
     if (t == NULL) return 0;
-    return (t->key == n) + count(t->left) + count(t->right);
+    return (t->key == n) + count(t->left, n) + count(t->right, n);
 }
 
 tree baz(tree s, tree t) {

@@ -1,10 +1,17 @@
 #include <stdlib.h>
+#include "e07/list.h"
 
+
+// We won't use the data type definitions from the exercise, shown in the
+// comment below, as they are equivalent to the ones defined in exercise 7.
+
+/*
 typedef struct listElement *list;
 typedef struct listElement {
     int value;
     list next;
 } listElement;
+*/
 
 int f(list l) {
     if (l == NULL) {

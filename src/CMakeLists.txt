@@ -16,4 +16,5 @@ add_subdirectory (e04)
 add_subdirectory (e05)
 add_subdirectory (e06)
 add_subdirectory (e07)
+add_subdirectory (e08)
 

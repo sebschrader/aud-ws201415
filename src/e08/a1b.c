@@ -1,12 +1,17 @@
 #include <stdlib.h>
+#include "e07/tree.h"
 
+/*
 typedef struct treeNode *tree;
 typedef struct treeNode {
     int value;
     tree left, right;
 } treeNode;
+*/
 
 void defol(tree *p) {
+    // Dereferencing p once and storing it in a local variable t makes the
+    // code a bit easier to read.
     tree t = *p;
     if (t == NULL) {
         return;
